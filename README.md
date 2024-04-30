@@ -1,12 +1,14 @@
 # Ex.No:1a  			Study of Socket Programming
+
 ### Name: NITHIYANERANJAN S
 ### Reg.NO: 212223040136
 ## Aim: 
 To perform a study on Socket Programming
 ## Introduction:
-Socket programming is a crucial aspect of network communication, allowing for data exchange between computers over a network. It forms the backbone of various networked applications, enabling communication between clients and servers. This study explores the fundamental concepts of socket programming, its use cases, and provides a practical example to demonstrate its implementation.
+
+ 	Socket programming is a crucial aspect of network communication, allowing for data exchange between computers over a network. It forms the backbone of various networked applications, enabling communication between clients and servers. This study explores the fundamental concepts of socket programming, its use cases, and provides a practical example to demonstrate its implementation.
 ## Understanding Socket Programming:
-Socket programming involves the use of sockets, which serve as endpoints for communication. A socket is identified by an IP address and a port number, and it facilitates data transfer between a client and a server. The two main types of sockets are Stream Sockets, which provide a reliable, connection-oriented communication, and Datagram Sockets, which are connectionless and suitable for scenarios where reliability is less critical.
+	Socket programming involves the use of sockets, which serve as endpoints for communication. A socket is identified by an IP address and a port number, and it facilitates data transfer between a client and a server. The two main types of sockets are Stream Sockets, which provide a reliable, connection-oriented communication, and Datagram Sockets, which are connectionless and suitable for scenarios where reliability is less critical.
 ## Key Concepts in Socket Programming:
 1.Sockets
 •	A socket is a software representation of a communication endpoint in a network.
@@ -57,37 +59,37 @@ Socket programming finds applications in various domains, including web developm
  ### CLIENT:
  ```
 import socket
+from datetime import datetime
 s=socket.socket()
 s.bind(('localhost',8000))
 s.listen(5)
 c,addr=s.accept()
-while True:
- i=input("Enter a data: ")
- c.send(i.encode())
- ack=c.recv(1024).decode()
- if ack:
+print("Client Address : ",addr)
+now = datetime.now()
+c.send(now.strftime("Date: %d/%m/%Y and Time: %H:%M:%S").encode())
+ack=c.recv(1024).decode()
+if ack:
  print(ack)
- continue
- else:
- c.close()
- break
+c.close()
+
 ```
 ### SERVER
 ```
 import socket
 s=socket.socket()
 s.connect(('localhost',8000))
-while True:
- print(s.recv(1024).decode())
- s.send("Acknowledgement Recived".encode())
+print(s.getsockname())
+print(s.recv(1024).decode())
+s.send("acknowledgement recived from the server".encode())
 ```
 ## OUTPUT
  ### CLIENT:
-![Screenshot 2024-04-29 140243](https://github.com/NITHIYANERANJAN/SocketStudy/assets/144979351/59a242ec-1511-497e-ba04-6f3e63d7a0e0)
- 
+ ![image](https://github.com/NITHIYANERANJAN/SocketStudy/assets/144979351/d575e564-b49a-4dbd-8153-3fe6a7f55b27)
+
+
 
  ### SERVER:
- ![image](https://github.com/NITHIYANERANJAN/SocketStudy/assets/144979351/4f0a49dc-8396-4a47-abc3-642070074c55)
+ ![image](https://github.com/NITHIYANERANJAN/SocketStudy/assets/144979351/50194ef0-f421-4818-bb00-682f51b657cb)
 
 
 ## Result:
